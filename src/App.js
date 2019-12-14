@@ -1,26 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect} from 'react';
+import firebase from '../../sap003-burger-queen/src/Utils/Firebase/firebaseUtils';
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  useEffect(() => {
+    firebase.firestore().collection('menu').get()
+      .then(doc => {
+        doc.forEach(docs => {
+          console.log(docs.data());
+        })
+      })
+  }, [])
+  return(
+    <div>vai funfa</div>
+  )
 }
 
 export default App;
