@@ -1,19 +1,13 @@
-import React, {useEffect} from 'react';
-import firebase from '../../sap003-burger-queen/src/Utils/Firebase/firebaseUtils';
-
+import React from 'react';
+import Button from '@material-ui/core/Button';
+import "typeface-roboto"
 
 function App() {
-  useEffect(() => {
-    firebase.firestore().collection('menu').get()
-      .then(doc => {
-        doc.forEach(docs => {
-          console.log(docs.data());
-        })
-      })
-  }, [])
-  return(
-    <div>vai funfa</div>
-  )
+  return (
+    <Button variant="contained" color="primary">
+      Olá Mundo
+    </Button>
+  );
 }
 
 export default App;
