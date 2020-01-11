@@ -4,11 +4,11 @@ import { Box, Typography, Button, TextField } from '@material-ui/core'
 
 function HeadClientInfo() {
     return (
-        <Box bgcolor="#F1F1F1" height="898px" width="768px" display="flex" color="#444444" >
+        <Box bgcolor="#F1F1F1" display="flex" color="#444444" >
             <Box p="10px">
                 <Button variant="contained" sizeSmall>Voltar</Button>
             </Box>
-            <Box display="flex" alignItems="center" flexDirection="column"  >
+            <Box display="flex" alignItems="center" flexDirection="column" alignItems="center" >
                 <Box ontWeight="600" textAlign="center" display="flex" py="40px">
                     <Typography variant="h4">DADOS DO CLIENTE</Typography>
                 </Box>

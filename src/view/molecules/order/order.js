@@ -1,13 +1,27 @@
 import React from 'react';
 import { Box, Button, ButtonGroup, Typography, Divider } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
+// import { makeStyles } from '@material-ui/styles'
+
+// const useStyles = makeStyles({
+//     root: {
+//         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+//         border: 0,
+//         borderRadius: 3,
+//         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+
+//         height: 48,
+//         padding: '0 30px',
+//     },
+// });
+
 
 function Order() {
+    // const classes = useStyles();
     return (
         <Box bgcolor="#F1F1F1" height="898px" width="768px" display="flex" color="#444444" flexDirection="column">
             <Box bgcolor="#9C2B08" height="60px" width="768px" >
                 <Box p="12px">
-                    <ButtonGroup color="#FFFFFF">
+                    <ButtonGroup variant="text">
                         <Button>CAFÉ DA MANHÃ</Button>
                         <Button>ALMOÇO</Button>
                     </ButtonGroup>
@@ -151,7 +165,7 @@ function Order() {
 
                 </Box>
 
-                <Box m="20px" ml="0" bgcolor="#FFFFFF" width="350px" borderRadius="8px" >
+                <Box m="20px" ml="0" bgcolor="#FFFFFF" width="350px" borderRadius="8px">
                     <Box p="10px">
                         <Typography variant="subtitle1"><b>RESUMO DO PEDIDO</b></Typography>
                     </Box>
@@ -208,7 +222,9 @@ function Order() {
                             <Button variant="contained" fullWidth size="large">ENVIAR PARA PREPARO</Button>
                         </Box>
                         <Box>
-                            <Button variant="contained" fullWidth size="small">CANCELAR PEDIDO</Button>
+                            <Button variant="contained" fullWidth size="small">
+                                CANCELAR PEDIDO
+                            </Button>
                         </Box>
                     </Box>
                 </Box>
@@ -219,10 +235,5 @@ function Order() {
     );
 }
 
-const useStyles = makeStyles(theme => ({
-    root: {
-
-    },
-}));
 
 export default Order;
