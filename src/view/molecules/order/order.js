@@ -1,344 +1,300 @@
-import React from 'react';
-import { Box, Button, ButtonGroup, Typography, Divider } from '@material-ui/core'
-// import Item from "../item"
-// import { makeStyles } from '@material-ui/styles'
+import React, { useEffect, useState } from 'react';
+import { Box, Button, ButtonGroup, Typography, Divider } from '@material-ui/core';
+import OptionsAndExtras from '../../molecules/optionsAndExtras/optionsAndExtras'
 
-// const useStyles = makeStyles({
-//     root: {
-//         background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
-//         border: 0,
-//         borderRadius: 3,
-//         boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+const formatter = new Intl.NumberFormat('pt-BR', {
+  style: 'currency',
+  currency: 'BRL',
+});
 
-//         height: 48,
-//         padding: '0 30px',
-//     },
-// });
+const Card = ({ title, items, onAdd }) => {
+  return (<Box
+    bgcolor="#FFFFFF"
+    width="350px"
+    borderRadius="8px"
+    mb="20px"
+  >
+    <Box p="10px">
+      <Typography variant="subtitle1">
+        <b>{title}</b>
+      </Typography>
+    </Box>
+
+    <Divider />
+    {items.map((item) => (
+      <Box key={item.id}>
+        <Box
+          display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          p="10px"
+        >
+          <Box>
+            <Typography>{item.name}</Typography>
+          </Box>
+          <Box display="flex" alignItems="center">
+            <Box pr="10px">
+              <Typography>{formatter.format(item.price)}</Typography>
+            </Box>
+            <Box>
+              <Button variant="contained" size="small" onClick={() => onAdd(item)}>+</Button>
+            </Box>
+          </Box>
+        </Box>
+
+        <Divider />
+      </Box>
+    ))}
+  </Box>
+  )
+}
+
+function Order({ breakfast, name, table, burger, sideDish, beverages, onSubmit, onCancel }) {
+  const [items, setItems] = useState([]);
+  const [filter, setFilter] = useState('breakfast');
+  const [extraModal, setExtraModal] = useState(null)
+
+  function handleSubmit() {
+    onSubmit({
+      table,
+      name,
+      items,
+      bill: total()
+    })
+    console.log(items);
+
+  }
+
+  function toggleFilter(toggle) {
+    setFilter(toggle)
+  }
+
+  function addItem(item) {
+    setItems([
+      ...items,
+      item
+    ])
+  }
+
+  function removeItem(item) {
+    setItems([
+      ...items.filter(i => i.uid !== item.uid)
+    ])
+  }
+
+  function total() {
+    return items.reduce((acc, item) => {
+      acc += item.price
+
+      if (item.extras) {
+        acc += 1
+      }
+      return acc
+    }, 0)
+  }
+
+  return (
+    <>
+      {extraModal && <OptionsAndExtras
+        burger={extraModal}
+        onSubmit={(item) => addItem(item)}
+        onClose={() => setExtraModal(null)}
+      />}
+
+      <Box
+        bgcolor="#F1F1F1"
+        minHeight="100vh"
+        display="flex"
+        color="#444444"
+        flexDirection="column"
+      >
+        {/* MENU */}
+        <Box
+          display="flex"
+          justifyContent="center"
+          bgcolor="#9C2B08"
+          height="60px"
+        >
+          <Box p="12px" maxWidth="768px" width="100%">
+            <ButtonGroup variant="text">
+              <Button onClick={() => toggleFilter('breakfast')}>CAFÉ DA MANHÃ</Button>
+              <Button onClick={() => toggleFilter('lunch')}>ALMOÇO</Button>
+            </ButtonGroup>
+          </Box>
+        </Box>
+
+        <Box display="flex" justifyContent="center" alignItems="flex-start"
+        >
+
+          <Box m="20px">
+            {filter === 'breakfast' && (
+              <Card
+                title="CAFE DA MANHA"
+                items={breakfast}
+                onAdd={(item) => addItem({ ...item, uid: item.id + Date.now() })
+                }
+              />
+            )}
+
+            {filter === 'lunch' && (
+              <Card
+                title="HAMBURGER"
+                items={burger}
+                onAdd={(item) => setExtraModal({ ...item, uid: item.id + Date.now() })
+                }
+              />
+            )}
+
+            {filter === 'lunch' && (
+              <Card
+                title="ADICIONAIS"
+                items={sideDish}
+                onAdd={(item) => addItem({ ...item, uid: item.id + Date.now() })
+                }
+              />
+            )}
+
+            {filter === 'lunch' && (
+              <Card
+                title="BEBIDAS"
+                items={beverages}
+                onAdd={(item) => addItem({ ...item, uid: item.id + Date.now() })
+                }
+              />
+            )}
+          </Box>
+
+          <Box
+            m="20px"
+            ml="0"
+            bgcolor="#FFFFFF"
+            width="350px"
+            borderRadius="8px"
+          >
+            <Box p="10px">
+              <Typography variant="subtitle1">
+                <b>RESUMO DO PEDIDO</b>
+              </Typography>
+            </Box>
+
+            <Divider />
+
+            <Box>
+              <Box p="10px">
+                <Typography><b>MESA:{table}</b></Typography>
+              </Box>
+              <Box p="10px" pt="0">
+                <Typography><b>NOME:{name}</b></Typography>
+              </Box>
+            </Box>
+
+            <Divider />
+
+            {items.map((item) => (
+              item.burger ?
+
+                <Box>
+                  <Box
+                    display="flex"
+                    alignItems="center"
+                    justifyContent="space-between"
+                    p="10px"
+                  >
+                    <Box>
+                      <Box>
+                        <Typography>({item.options})</Typography>
+                      </Box>
+                      <Box justifyContent="space-between" display="flex">
+                        <Box>
+                          <Typography>{item.name}</Typography>
+                        </Box>
+                        <Box pl="30px">
+                          <Typography>{formatter.format(item.price)}</Typography>
+                        </Box>
+                      </Box>
+                      {item.extras && (
+                        <Box justifyContent="space-between" display="flex">
+                          <Box>
+                            <Typography>+ {item.extras}</Typography>
+                          </Box>
+                          <Box>
+                            <Typography>R$ 1,00</Typography>
+                          </Box>
+                        </Box>
+                      )}
+                    </Box>
+
+                    <Box>
+                      <Box pt="10px">
+                        <Button variant="contained" size="small" onClick={() => removeItem(item)}>
+                          <b>-</b>
+                        </Button>
+                      </Box>
+                    </Box>
+
+                  </Box>
+                  <Divider />
+                </Box>
 
 
-function Order() {
-	// const classes = useStyles();
-	return (
-		<Box
-			bgcolor="#F1F1F1"
-			height="898px"
-			width="768px"
-			display="flex"
-			color="#444444"
-			flexDirection="column"
-		>
-			<Box
-				bgcolor="#9C2B08"
-				height="60px"
-				width="768px"
-			>
-				<Box p="12px">
-					<ButtonGroup variant="text">
-						<Button>CAFÉ DA MANHÃ</Button>
-						<Button>ALMOÇO</Button>
-					</ButtonGroup>
-				</Box>
-			</Box>
+                :
 
-			<Box display="flex" >
+                <Box key={item.uid}>
+                  <Box
+                    display="flex"
+                    justifyContent="space-between"
+                    alignItems="center"
+                    p="10px"
+                  >
+                    <Box>
+                      <Typography>{item.name}</Typography>
+                    </Box>
+                    <Box display="flex" alignItems="center">
+                      <Box pr="10px">
+                        <Typography>{formatter.format(item.price)}</Typography>
+                      </Box>
+                      <Box>
+                        <Button variant="contained" size="small" onClick={() => removeItem(item)}>-</Button>
+                      </Box>
+                    </Box>
+                  </Box>
 
-				<Box m="20px">
-					{/* HAMBURGUERES */}
-					<Box
-						bgcolor="#FFFFFF"
-						width="350px"
-						borderRadius="8px"
-						mb="20px"
-					>
-						<Box p="10px">
-							<Typography variant="subtitle1">
-								<b>HAMBÚRGUERES</b>
-							</Typography>
-						</Box>
+                  <Divider />
+                </Box>
+            ))}
 
-						<Divider />
-						{/* BURGER SILPLES */}
-						<Box
-							display="flex"
-							justifyContent="space-between"
-							alignItems="center"
-							p="10px"
-						>
-							<Box>
-								<Typography>Hamburguer simples</Typography>
-							</Box>
-							<Box display="flex" alignItems="center">
-								<Box pr="10px">
-									<Typography>R$ 10</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
+            <Box
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+            >
+              <Box p="10px">
+                <Typography><b>TOTAL</b></Typography>
+              </Box>
+              <Box p="10px">
+                <Typography><b>{formatter.format(total())}</b></Typography>
+              </Box>
+            </Box>
 
-						<Divider />
-						{/* BURGER DUPLO */}
-						<Box
-							display="flex"
-							justifyContent="space-between"
-							alignItems="center"
-							p="10px"
-						>
-							<Box>
-								<Typography>Hamburguer duplo</Typography>
-							</Box>
-							<Box display="flex" alignItems="center">
-								<Box pr="10px">
-									<Typography>R$ 15</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Box>
-					{/* adicionais */}
-					<Box bgcolor="#FFFFFF" width="350px" borderRadius="8px" mb="20px" >
-						<Box p="10px">
-							<Typography variant="subtitle1"><b>ADICIONAIS</b></Typography>
-						</Box>
-						<Divider />
-						{/* BATATA FRITA */}
-						<Box
-							display="flex"
-							justifyContent="space-between"
-							alignItems="center"
-							p="10px"
-						>
-							<Box>
-								<Typography>Batata Frita</Typography>
-							</Box>
-							<Box display="flex" alignItems="center">
-								<Box pr="10px">
-									<Typography>R$ 5</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-
-						<Divider />
-						{/* ANEIS DE CEBOLA */}
-						<Box
-							display="flex"
-							justifyContent="space-between"
-							alignItems="center"
-							p="10px"
-						>
-							<Box>
-								<Typography>Anéis de Cebola</Typography>
-							</Box>
-							<Box display="flex" alignItems="center">
-								<Box pr="10px">
-									<Typography>R$ 5</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Box>
-					{/* BEBIDAS */}
-					<Box
-						bgcolor="#FFFFFF"
-						width="350px"
-						borderRadius="8px"
-						mb="20px"
-					>
-						<Box p="10px">
-							<Typography variant="subtitle1"><b>BEBIDAS</b></Typography>
-						</Box>
-
-						<Divider />
-
-						<Box
-							display="flex"
-							alignItems="center" j
-							ustifyContent="space-between"
-							p="10px"
-						>
-							<Box>
-								<Typography>Refrigerante 750ml</Typography>
-							</Box>
-							<Box display="flex">
-								<Box pr="10px">
-									<Typography>R$ 10</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-
-						<Divider />
-
-						<Box
-							display="flex"
-							alignItems="center"
-							justifyContent="space-between"
-							p="10px"
-						>
-							<Box>
-								<Typography>Refrigerante 500ml</Typography>
-							</Box>
-							<Box display="flex">
-								<Box pr="10px">
-									<Typography>R$ 7</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-
-						<Divider />
-
-						<Box
-							display="flex"
-							alignItems="center"
-							justifyContent="space-between"
-							p="10px"
-						>
-							<Box>
-								<Typography>Água 750ml</Typography>
-							</Box>
-							<Box display="flex">
-								<Box pr="10px">
-									<Typography>R$ 7</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-
-						<Divider />
-
-						<Box
-							display="flex"
-							alignItems="center"
-							justifyContent="space-between"
-							p="10px"
-						>
-							<Box>
-								<Typography>Água 500ml</Typography>
-							</Box>
-							<Box display="flex">
-								<Box pr="10px">
-									<Typography>R$ 5</Typography>
-								</Box>
-								<Box>
-									<Button variant="contained" size="small">+</Button>
-								</Box>
-							</Box>
-						</Box>
-					</Box>
-
-				</Box>
-
-				<Box
-					m="20px"
-					ml="0"
-					bgcolor="#FFFFFF"
-					width="350px"
-					borderRadius="8px"
-				>
-					<Box p="10px">
-						<Typography variant="subtitle1">
-							<b>RESUMO DO PEDIDO</b>
-						</Typography>
-					</Box>
-
-					<Divider />
-
-					<Box>
-						<Box p="10px">
-							<Typography><b>MESA:</b></Typography>
-						</Box>
-						<Box p="10px" pt="0">
-							<Typography><b>NOME:</b></Typography>
-						</Box>
-					</Box>
-
-					<Divider />
-
-					<Box
-						display="flex"
-						alignItems="center"
-						justifyContent="space-between"
-						p="10px"
-					>
-						<Box>
-							<Box>
-								<Typography>(FRANGO)</Typography>
-							</Box>
-							<Box justifyContent="space-between" display="flex">
-								<Box>
-									<Typography>Hamburguer simples</Typography>
-								</Box>
-								<Box pl="30px">
-									<Typography>R$ 10</Typography>
-								</Box>
-							</Box>
-							<Box justifyContent="space-between" display="flex">
-								<Box>
-									<Typography>+ OVO</Typography>
-								</Box>
-								<Box>
-									<Typography>R$ 1</Typography>
-								</Box>
-							</Box>
-						</Box>
-
-						<Box>
-							<Box pt="10px">
-								<Button variant="contained" size="small">
-									<b>-</b>
-								</Button>
-							</Box>
-						</Box>
-
-					</Box>
-
-					<Divider />
-
-					<Box
-						display="flex"
-						justifyContent="space-between"
-						alignItems="center"
-					>
-						<Box p="10px">
-							<Typography><b>TOTAL</b></Typography>
-						</Box>
-						<Box p="10px">
-							<Typography><b>R$</b></Typography>
-						</Box>
-					</Box>
-					<Box m="10px">
-						<Box pb="10px">
-							<Button variant="contained" fullWidth size="large">
-								ENVIAR PARA PREPARO
+            <Box m="10px">
+              <Box pb="10px">
+                <Button variant="contained" fullWidth size="large" onClick={handleSubmit}>
+                  ENVIAR PARA PREPARO
 							</Button>
-						</Box>
-						<Box>
-							<Button variant="contained" fullWidth size="small">
-								CANCELAR PEDIDO
+              </Box>
+              <Box>
+                <Button variant="contained" fullWidth size="small" onClick={onCancel}>
+                  CANCELAR PEDIDO
               </Button>
-						</Box>
-					</Box>
-				</Box>
+              </Box>
+            </Box>
+          </Box>
 
-			</Box>
+        </Box>
 
-		</Box >
-	);
+      </Box >
+    </>
+  );
 }
 
 
