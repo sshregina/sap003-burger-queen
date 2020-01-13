@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Box, Button, ButtonGroup, Typography, Divider } from '@material-ui/core';
-import OptionsAndExtras from '../../molecules/optionsAndExtras/optionsAndExtras'
+import OptionsAndExtras from '../../molecules/options-and-extras/options-and-extras';
 
 const formatter = new Intl.NumberFormat('pt-BR', {
   style: 'currency',
@@ -20,9 +20,10 @@ const Card = ({ title, items, onAdd }) => {
       </Typography>
     </Box>
 
-    <Divider />
+
     {items.map((item) => (
       <Box key={item.id}>
+        <Divider />
         <Box
           display="flex"
           justifyContent="space-between"
@@ -42,7 +43,7 @@ const Card = ({ title, items, onAdd }) => {
           </Box>
         </Box>
 
-        <Divider />
+
       </Box>
     ))}
   </Box>
@@ -61,8 +62,6 @@ function Order({ breakfast, name, table, burger, sideDish, beverages, onSubmit, 
       items,
       bill: total()
     })
-    console.log(items);
-
   }
 
   function toggleFilter(toggle) {
