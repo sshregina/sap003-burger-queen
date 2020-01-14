@@ -33,6 +33,16 @@ function Lounge() {
   const hasClient = order.table && order.name;
 
   // const hasClient = true;
+  const handleSaveOrder = (order) => {
+
+
+    saveOrder(order)
+    setOrder({
+      table: null,
+      name: null,
+      items: []
+    })
+  }
 
   const handleClient = ({
     name,
@@ -60,7 +70,7 @@ function Lounge() {
         beverages={menu.beverages}
         name={order.name}
         table={order.table}
-        onSubmit={(order) => { saveOrder(order) }}
+        onSubmit={handleSaveOrder}
         onCancel={() => setOrder({
           table: null,
           name: null,
