@@ -4,8 +4,6 @@ import Header from '../../molecules/header/header';
 import CardKitchen from '../../molecules/card-kitchen/card-kitchen';
 import { getOrder } from '../../../infra/services/firebaseQueries';
 
-
-
 function Kitchen() {
   const [orders, setOrders] = useState([])
 
@@ -23,10 +21,6 @@ function Kitchen() {
       <CardKitchen
         orders={orders}
       />
-
-
-
-
     </Box>
   );
 }

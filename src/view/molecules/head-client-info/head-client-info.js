@@ -17,8 +17,7 @@ function HeadClientInfo({ onSubmit, onBack }) {
   return (
     <Box bgcolor="#F1F1F1" display="flex" color="#444444" minHeight="100vh" justifyContent="center" >
       <Box p="10px">
-
-        <Button to='/kitchen' component={Link}>Sign in</Button>
+        <Button to='/kitchen' component={Link} variant="contained">IR PARA A COZINHA</Button>
       </Box>
       <Box display="flex" alignItems="center" flexDirection="column" >
         <Box textAlign="center" display="flex" py="40px">
