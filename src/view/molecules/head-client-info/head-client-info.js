@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { Box, Typography, Button, TextField } from '@material-ui/core'
+import { Box, Typography, Button, TextField } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 
 function HeadClientInfo({ onSubmit, onBack }) {
@@ -16,7 +17,8 @@ function HeadClientInfo({ onSubmit, onBack }) {
   return (
     <Box bgcolor="#F1F1F1" display="flex" color="#444444" minHeight="100vh" justifyContent="center" >
       <Box p="10px">
-        <Button variant="contained" onClick={onBack} >Voltar</Button>
+
+        <Button to='/kitchen' component={Link}>Sign in</Button>
       </Box>
       <Box display="flex" alignItems="center" flexDirection="column" >
         <Box textAlign="center" display="flex" py="40px">

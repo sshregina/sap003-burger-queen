@@ -32,10 +32,7 @@ function Lounge() {
 
   const hasClient = order.table && order.name;
 
-  // const hasClient = true;
   const handleSaveOrder = (order) => {
-
-
     saveOrder(order)
     setOrder({
       table: null,
@@ -60,8 +57,7 @@ function Lounge() {
       <Header />
 
       {!hasClient && (
-        <HeadClientInfo onSubmit={handleClient}
-          onBack={() => alert("ola")} />
+        <HeadClientInfo onSubmit={handleClient} />
       )}
       {hasClient && <Order
         breakfast={menu.breakfast}

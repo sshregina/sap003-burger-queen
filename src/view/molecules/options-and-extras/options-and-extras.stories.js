@@ -1,9 +1,9 @@
-import React from 'react';
-import OptionsAndExtras from './optionsAndExtras';
+// import React from 'react';
+// import OptionsAndExtras from './optionsAndExtras';
 
-export default {
-  component: OptionsAndExtras,
-  title: 'Molecules/OptionsAndExtras',
-};
+// export default {
+//   component: OptionsAndExtras,
+//   title: 'Molecules/OptionsAndExtras',
+// };
 
-export const exemplo = () => <OptionsAndExtras />;
+// export const exemplo = () => <OptionsAndExtras />;

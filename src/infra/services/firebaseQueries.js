@@ -75,9 +75,24 @@ export function getSideDish() {
         })
         )
         resolve(sideDish);
+
       })
   })
+}
 
+export function getOrder() {
+  return new Promise((resolve) => {
+    firebase.firestore().collection('order')
+      .orderBy('dispatchTime', 'asc')
+      .get()
+      .then((snapshot) => {
+        const order = snapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }))
+        resolve(order)
+      })
+  })
 }
 
 export function getMenu() {
@@ -105,6 +120,6 @@ export function saveOrder({ name, table, items, bill }) {
       }),
       bill,
       dispatchTime: new Date().toLocaleString('pt-BR'),
-      status: 'Encaminhado',
+      status: 'Enviado para preparo',
     })
 }

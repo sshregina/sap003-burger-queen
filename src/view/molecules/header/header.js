@@ -1,7 +1,7 @@
 import React from 'react';
-import { Box, Typography, Button } from '@material-ui/core'
+import { Box, Typography } from '@material-ui/core'
 import Logo from './sheila.png';
-// Box, Typography, Button
+
 function Header() {
   return (
     <Box
@@ -21,9 +21,9 @@ function Header() {
           <Typography variant="h4">Burger Queen</Typography>
         </Box>
       </Box>
-      <Box alignSelf="flex-end">
+      {/* <Box alignSelf="flex-end">
         <Button variant="contained" sizeSmall >Sair</Button>
-      </Box>
+      </Box> */}
     </Box>
   );
 }
