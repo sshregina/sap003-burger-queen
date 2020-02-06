@@ -68,7 +68,6 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
               <Box>
               </Box>
             </Box>
-            <Divider />
             <RadioGroup
               aria-label="options"
               name="optionsHamburger"
@@ -94,6 +93,7 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
             </RadioGroup>
           </FormControl>
         </Box>
+        <Divider />
         <Box>
           <FormControl>
             <Box p="10px">
@@ -101,7 +101,7 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
                 <b>EXTRAS</b> (+ R$ 1)
 									</Typography>
             </Box>
-            <Divider />
+
             <RadioGroup
               aria-label="options"
               name="optionsHamburger"
