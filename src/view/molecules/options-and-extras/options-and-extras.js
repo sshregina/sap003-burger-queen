@@ -94,7 +94,6 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
             </RadioGroup>
           </FormControl>
         </Box>
-
         <Box>
           <FormControl>
             <Box p="10px">
@@ -122,7 +121,6 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
             </RadioGroup>
           </FormControl>
         </Box>
-
         <Box p="10px" display="flex" justifyContent="space-between">
           <Button
             variant="contained"
@@ -130,7 +128,7 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
             onClick={handleSubmit}
           >
             Enviar
-							</Button>
+					</Button>
           <Button
             variant="contained"
             aria-label="delete"
@@ -138,11 +136,9 @@ function OptionsAndExtras({ onClose, onSubmit, burger }) {
             size="small"
           >
             Fechar
-              </Button>
+          </Button>
         </Box>
-
       </div>
-
     </Modal>
   )
 }
