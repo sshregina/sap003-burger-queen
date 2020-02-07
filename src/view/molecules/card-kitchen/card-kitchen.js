@@ -7,11 +7,10 @@ import { Link } from 'react-router-dom';
 function CardKitchen({ orders }) {
   return (
     <Box bgcolor="#F1F1F1" display="flex" color="#444444" minHeight="100vh" justifyContent="center">
-      <Box p="10px">
-        <Button to='/' component={Link} variant="contained">VOLTAR</Button>
-      </Box>
       <Box display="flex" flexDirection="column" alignItems="center">
-
+        <Box p="10px">
+          <Button to='/' component={Link} variant="contained" >VOLTAR</Button>
+        </Box>
         <Box textAlign="center" display="flex" py="40px">
           <Typography variant="h4">PEDIDOS PARA PREPARAR</Typography>
         </Box>

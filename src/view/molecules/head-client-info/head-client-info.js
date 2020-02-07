@@ -16,10 +16,10 @@ function HeadClientInfo({ onSubmit, onBack }) {
 
   return (
     <Box bgcolor="#F1F1F1" display="flex" color="#444444" minHeight="100vh" justifyContent="center" >
-      <Box p="10px">
-        <Button to='/kitchen' component={Link} variant="contained">IR PARA A COZINHA</Button>
-      </Box>
       <Box display="flex" alignItems="center" flexDirection="column" >
+        <Box p="10px">
+          <Button to='/kitchen' component={Link} variant="contained">PEDIDOS NA COZINHA</Button>
+        </Box>
         <Box textAlign="center" display="flex" py="40px">
           <Typography variant="h4">DADOS DO CLIENTE</Typography>
         </Box>
