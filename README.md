@@ -16,7 +16,6 @@ Para o layout da aparência do peojeto foi deseb=nhadi um ptotótipo no editor [
 
 <img src="./_docs/tela3.png" width="300px"/>
 
-
 ## 3. Objetivos de aprendizagem e Considerações Gerais
 
 O objetivo principal envolveu o aprendizado da construção de uma interface web usando React. A interface também foi planejada especificamente para rodar em tablets. O aplicativo é um Single Page App.
