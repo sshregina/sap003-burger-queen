@@ -6,6 +6,16 @@ Um pequeno restaurante de hambúrgueres, que está crescendo, necessita uma inte
 
 A interface deve mostrar os dois menus (café da manhã e restante do dia), cada um com todos os seus produtos. O usuário deve poder escolher que produtos adicionar e a interface deve mostrar o resumo do pedido com o custo total.
 
+## 2. Protótipo do projeto
+
+Para o layout da aparência do peojeto foi deseb=nhadi um ptotótipo no editor [Sketch](https://www.sketch.com/).
+
+![Tela de dados do cliente](./_docs/tela1.png)
+
+![Tela de produtos para pedido](./_docs/tela2.png)
+
+![Tela Cozinha](./_docs/tela3.png)
+
 ## 2. Objetivos de aprendizagem e Considerações Gerais
 
 O objetivo principal envolveu o aprendizado da construção de uma interface web usando React. A interface também foi planejada especificamente para rodar em tablets. O aplicativo é um Single Page App.
