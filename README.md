@@ -16,13 +16,13 @@ Para o layout da aparência do peojeto foi deseb=nhadi um ptotótipo no editor [
 
 ![Tela Cozinha](./_docs/tela3.png)
 
-## 2. Objetivos de aprendizagem e Considerações Gerais
+## 3. Objetivos de aprendizagem e Considerações Gerais
 
 O objetivo principal envolveu o aprendizado da construção de uma interface web usando React. A interface também foi planejada especificamente para rodar em tablets. O aplicativo é um Single Page App.
 
 O aplicativo utilizou scripts npm-scripts e teve start, build e deploy, que são responsáveis por iniciar, empacotar e implantar o aplicativo, respectivamente.
 
-## 3. Critérios de aceitação mínimos cumpridos pelo projeto
+## 4. Critérios de aceitação mínimos cumpridos pelo projeto
 
 **[História de usuário 1] Garçom/Garçonete deve poder anotar o seu pedido**
 
