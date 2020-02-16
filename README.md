@@ -10,11 +10,12 @@ A interface deve mostrar os dois menus (café da manhã e restante do dia), cada
 
 Para o layout da aparência do peojeto foi deseb=nhadi um ptotótipo no editor [Sketch](https://www.sketch.com/).
 
-![Tela de dados do cliente](./_docs/tela1.png)
+<img src="./_docs/tela1.png" width="300px"/>
 
-![Tela de produtos para pedido](./_docs/tela2.png)
+<img src="./_docs/tela2.png" width="300px"/>
 
-![Tela Cozinha](./_docs/tela3.png)
+<img src="./_docs/tela3.png" width="300px"/>
+
 
 ## 3. Objetivos de aprendizagem e Considerações Gerais
 
